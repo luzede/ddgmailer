@@ -28,15 +28,26 @@ document.addEventListener('DOMContentLoaded', () => {
         const generatedEmail = generateDDGEmail(fromEmail, toEmail);
         
         // Display the result
-        generatedEmailEl.textContent = generatedEmail;
+        generatedEmailEl.value = generatedEmail;
         resultDiv.classList.remove('hidden');
         
         // Update mailto link
         mailtoLink.href = `mailto:${generatedEmail}`;
     });
     
+    // Fixed to use .value instead of .textContent
     copyBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(generatedEmailEl.textContent)
+        copyToClipboard();
+    });
+    
+    // Add click handler to the input field
+    generatedEmailEl.addEventListener('click', () => {
+        copyToClipboard();
+    });
+    
+    // Helper function to copy and show message
+    function copyToClipboard() {
+        navigator.clipboard.writeText(generatedEmailEl.value)
             .then(() => {
                 copyMessage.classList.remove('hidden');
                 setTimeout(() => {
@@ -46,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => {
                 console.error('Could not copy text: ', err);
             });
-    });
+    }
     
     resetBtn.addEventListener('click', () => {
         emailForm.reset();
