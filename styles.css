@@ -1,46 +1,46 @@
 :root {
-    --primary-color: #de5833;
-    --accent-color: #de5833;
-    --text-color: #333333;
-    --text-secondary: #666666;
+    --primary-color: #c13920; /* Darkened for 5:1+ contrast ratio with white */
+    --accent-color: #c13920; /* Matching primary color */
+    --text-color: #1d1d1f; /* Darker text color for better contrast */
+    --text-secondary: #515154; /* Darker secondary text */
     --background-color: #f5f5f7;
     --card-background: #ffffff;
-    --border-color: #e6e6e6;
+    --border-color: #d2d2d7;
     --border-radius: 12px;
     --transition: all 0.3s ease;
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     --input-background: #fafafa;
     --result-background: #f8f8f8;
-    --btn-secondary-bg: #f2f2f2;
+    --btn-secondary-bg: #e8e8ed; /* Slightly darker for better contrast */
     --element-height: 48px;
     --element-padding: 12px 16px;
 }
 
 /* Dark theme variables */
 [data-theme="dark"] {
-    --text-color: #f0f0f0;
-    --text-secondary: #b0b0b0;
-    --background-color: #1a1a1a;
-    --card-background: #2a2a2a;
-    --border-color: #444444;
+    --text-color: #f5f5f7; /* Brighter white for better contrast */
+    --text-secondary: #cecece; /* Lighter secondary text for better contrast */
+    --background-color: #1d1d1f; /* Apple's dark background color */
+    --card-background: #2c2c2e; /* Apple's dark card color */
+    --border-color: #444446; /* Subtle border color */
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    --input-background: #3a3a3a;
-    --result-background: #3a3a3a;
-    --btn-secondary-bg: #3a3a3a;
+    --input-background: #3a3a3c; /* Apple's dark input color */
+    --result-background: #3a3a3c;
+    --btn-secondary-bg: #3a3a3c;
 }
 
 /* System preference handling */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-        --text-color: #f0f0f0;
-        --text-secondary: #b0b0b0;
-        --background-color: #1a1a1a;
-        --card-background: #2a2a2a;
-        --border-color: #444444;
+        --text-color: #f5f5f7;
+        --text-secondary: #cecece;
+        --background-color: #1d1d1f;
+        --card-background: #2c2c2e;
+        --border-color: #444446;
         --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-        --input-background: #3a3a3a;
-        --result-background: #3a3a3a;
-        --btn-secondary-bg: #3a3a3a;
+        --input-background: #3a3a3c;
+        --result-background: #3a3a3c;
+        --btn-secondary-bg: #3a3a3c;
     }
 }
 
@@ -201,7 +201,7 @@ input:focus {
 }
 
 .generate-btn:hover {
-    background-color: #c54a2a;
+    background-color: #a32e18; /* Adjusted darker hover state */
 }
 
 #result {
@@ -321,7 +321,7 @@ code {
 .copy-message {
     font-size: 14px;
     color: var(--accent-color);
-    font-weight: 500;
+    font-weight: 600; /* Bolder weight for better visibility */
     text-align: center;
     margin-top: -8px;
     margin-bottom: 16px;
@@ -331,11 +331,13 @@ footer {
     text-align: center;
     font-size: 14px;
     color: var(--text-secondary);
+    margin-top: 20px; /* Added spacing */
 }
 
 footer a {
     color: var(--accent-color);
     text-decoration: none;
+    font-weight: 500; /* Slightly bolder for better visibility */
 }
 
 footer a:hover {
