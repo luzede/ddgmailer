@@ -9,15 +9,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetBtn = document.getElementById('resetBtn');
     const copyMessage = document.getElementById('copyMessage');
     const themeToggle = document.getElementById('themeToggle');
+    const themeMetaColor = document.getElementById('themeMetaColor');
     
     // Theme handling
     function setTheme(theme) {
         if (theme === 'auto') {
             localStorage.removeItem('theme');
             document.documentElement.removeAttribute('data-theme');
+            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            updateMetaThemeColor(systemTheme);
         } else {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('theme', theme);
+            updateMetaThemeColor(theme);
+        }
+    }
+    
+    function updateMetaThemeColor(theme) {
+        // Update the meta theme-color based on current theme
+        if (theme === 'dark') {
+            themeMetaColor.setAttribute('content', '#1d1d1f');
+        } else {
+            themeMetaColor.setAttribute('content', '#c13920');
         }
     }
     
@@ -38,6 +51,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const savedTheme = localStorage.getItem('theme');
         if (savedTheme) {
             document.documentElement.setAttribute('data-theme', savedTheme);
+            updateMetaThemeColor(savedTheme);
+        } else {
+            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', systemTheme);
+            updateMetaThemeColor(systemTheme);
         }
         
         // Add system preference class for icon control
@@ -53,6 +71,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add theme toggle listener
     themeToggle.addEventListener('click', toggleTheme);
+
+    // Add system theme change listener
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('theme')) {
+            const newTheme = e.matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            updateMetaThemeColor(newTheme);
+        }
+    });
 
     emailForm.addEventListener('submit', (e) => {
         e.preventDefault();
