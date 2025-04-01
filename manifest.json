@@ -1,0 +1,9 @@
+{
+  "name": "DuckDuckGo Mailer",
+  "short_name": "DDG Mailer",
+  "description": "Create custom forwarding addresses for your DuckDuckGo email",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f5f5f7",
+  "theme_color": "#c13920"
+}
