@@ -8,6 +8,51 @@ document.addEventListener('DOMContentLoaded', () => {
     const mailtoLink = document.getElementById('mailtoLink');
     const resetBtn = document.getElementById('resetBtn');
     const copyMessage = document.getElementById('copyMessage');
+    const themeToggle = document.getElementById('themeToggle');
+    
+    // Theme handling
+    function setTheme(theme) {
+        if (theme === 'auto') {
+            localStorage.removeItem('theme');
+            document.documentElement.removeAttribute('data-theme');
+        } else {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+    }
+    
+    function getEffectiveTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            return savedTheme;
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    
+    function toggleTheme() {
+        const currentTheme = getEffectiveTheme();
+        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
+    }
+    
+    function initTheme() {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+        
+        // Add system preference class for icon control
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark-mode-system');
+        } else {
+            document.documentElement.classList.add('light-mode-system');
+        }
+    }
+    
+    // Initialize theme
+    initTheme();
+    
+    // Add theme toggle listener
+    themeToggle.addEventListener('click', toggleTheme);
 
     emailForm.addEventListener('submit', (e) => {
         e.preventDefault();
